@@ -1,0 +1,32 @@
+{
+  "name": "miniprogram-skills",
+  "interface": {
+    "displayName": "Mini Program Skills"
+  },
+  "plugins": [
+    {
+      "name": "wechatide-skill",
+      "source": {
+        "source": "local",
+        "path": "./plugins/wechatide-skill"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "wechat-miniprogram",
+      "source": {
+        "source": "local",
+        "path": "./plugins/wechat-miniprogram"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

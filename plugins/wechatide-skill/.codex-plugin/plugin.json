@@ -1,0 +1,21 @@
+{
+  "name": "wechatide-skill",
+  "version": "0.3.6",
+  "description": "微信开发者工具工作流：小程序/小游戏的创建与导入、编译预览上传、登录与项目管理、页面自动化、调试取证、云开发，以及开发者工具的下载安装更新",
+  "author": {
+    "name": "ipfans",
+    "url": "https://github.com/ipfans"
+  },
+  "repository": "https://github.com/ipfans/miniprogram-skills",
+  "license": "MIT",
+  "keywords": ["wechat", "miniprogram", "wechatide", "微信开发者工具", "小程序", "小游戏"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "微信开发者工具 Skill",
+    "shortDescription": "微信小程序/小游戏开发者工具全流程 skill",
+    "longDescription": "微信开发者工具工作流：小程序/小游戏的创建与导入、编译预览上传、登录与项目管理、页面自动化、调试取证、云开发，以及开发者工具的下载安装更新",
+    "developerName": "ipfans",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "wechat-miniprogram",
+  "displayName": "WeChat Mini Program",
+  "version": "1.0.0",
+  "description": "WeChat Mini Program development framework — WXML/WXSS/WXS templates, components, APIs, cloud development, and Skyline rendering engine",
+  "author": {
+    "name": "ipfans",
+    "url": "https://github.com/ipfans"
+  },
+  "repository": "https://github.com/ipfans/miniprogram-skills",
+  "license": "MIT",
+  "keywords": ["wechat", "miniprogram", "小程序", "skyline", "wxss", "wxml"],
+  "skills": "./skills/"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "miniprogram-skills",
+  "owner": {
+    "name": "ipfans",
+    "url": "https://github.com/ipfans"
+  },
+  "version": "1.0.0",
+  "description": "WeChat Mini Program development skills and tools for Claude Code",
+
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+
+  "plugins": [
+    {
+      "name": "wechatide-skill",
+      "source": "./plugins/wechatide-skill",
+      "description": "微信开发者工具工作流：小程序/小游戏的创建与导入、编译预览上传、登录与项目管理、页面自动化、调试取证、云开发，以及开发者工具的下载安装更新",
+      "version": "0.3.6",
+      "author": { "name": "ipfans" }
+    },
+    {
+      "name": "wechat-miniprogram",
+      "source": "./plugins/wechat-miniprogram",
+      "description": "WeChat Mini Program development framework — WXML/WXSS/WXS templates, components, APIs, cloud development, and Skyline rendering engine",
+      "version": "1.0.0",
+      "author": { "name": "ipfans" }
+    }
+  ]
+}
