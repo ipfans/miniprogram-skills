@@ -6,7 +6,7 @@
       "title": "开发工作流",
       "description": "项目初始化、编译预览、上传发布",
       "skills": [
-        "wechatide-tools",
+        "wechatide-skill",
         "initializer",
         "compiler",
         "previewer"
