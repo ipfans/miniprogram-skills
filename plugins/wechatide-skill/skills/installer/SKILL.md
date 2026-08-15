@@ -2,7 +2,7 @@
 name: installer
 description: >-
   检查、下载或更新微信开发者工具。识别未安装、wechatide CLI 不可用、NW.js 版及过低的 Electron
-  版本并强制进入更新流程。支持手动或主动下载。
+  版本并强制进入更新流程；也处理 agent_ahead 后出现的明确版本兼容 blocker。支持手动或主动下载。
   Skill 首次安装/导入时须先跑 check-installation；DMG 等未写入 PATH 时用 ensure-cli-path 补齐软链。
 ---
 
@@ -46,7 +46,7 @@ description: >-
 - 诊断结果为 NW.js、Electron 版本过低、或 `cli_unavailable` 等 `mustEnterInstaller: true`
 - `versionRelation: agent_ahead` 且后续因工具/参数不受支持等**明确兼容 blocker**无法继续
 
-**Skill 安装/导入时必须跑**安装检查。进入后无需 `check_wechatide_status`（安装完成前也无需根 SKILL 可用状态门禁）。
+**日常业务会话**不要主动跑安装检查；**Skill 安装/导入时必须跑**。进入后不要重复 `check_wechatide_status`（安装完成前也无需根 SKILL 可用状态门禁）。
 
 ## 安装状态检查（三种引导）
 

@@ -25,18 +25,19 @@
 | `simulator_refresh` | compiler | 触发项目窗口模拟器重新编译/刷新当前页面；不返回编译结果 |
 | `get_simulator_console` | debugger | 对小程序 console 缓冲区执行 grep 过滤并返回命中行。command 是 grep 命令字符串（不含文件名），如 'grep -i error... |
 | `get_simulator_network` | debugger | 对小程序 network 缓冲区执行 grep 过滤并返回命中行。command 是 grep 命令字符串（不含文件名）。要获取全部请求记录请用 'gre... |
-| `simulator_screenshot` | debugger | 截图；支持 wait / waitForSelector 和本地 path。不传 path 时写入临时文件并返回路径；默认优化尺寸和分辨率（缩至长边 12... |
+| `simulator_screenshot` | debugger（主；亦可 automator） | 截图；返回 path + imageWidth/imageHeight；默认优化尺寸（长边 1280 JPEG） |
 | `get_user_appids` | initializer | 获取当前登录用户可管理的全部 AppID 列表。可通过 type 按小程序/小游戏过滤。 |
 | `compile_wxml` | compiler | 只读获取 WXML 模板的编译结果摘要，用于诊断模板编译产物；不是整页编译或预览。 |
 | `compile_wxss` | compiler | 只读获取 WXSS 样式的编译结果摘要，用于诊断样式编译产物；不是整页编译或预览。 |
 | `automation_element_action` | automator | 读取或操作 selector 命中的元素；交互 action 会真实触发点击、输入、滚动或触摸事件，支持操作前等待。 |
-| `automation_evaluate` | automator | 在小程序上下文中执行受控 evaluate。 |
+| `automation_game_action` | automator | 小游戏画布触摸：tap / swipe / touch*；坐标默认画布空间，可用 coordinateSpace=image + imageWidth/H... |
+| `automation_evaluate` | automator | 在当前小程序或小游戏运行时执行一段 JS 函数字符串并返回结果。该工具会实际执行代码，不是只读查询 |
 | `automation_generate_script` | automator | 把已记录调用生成可运行的 automator 脚本。 |
 | `automation_navigate` | automator | 在当前小程序运行时执行页面导航，不负责页面断言；支持 waitForSelector / wait 在导航前等待。 |
 | `automation_page_action` | automator | 针对当前页面实例执行页面级读写。可选 waitForSelector/wait 在操作前等待 |
 | `automation_runtime_info` | initializer（主；亦可 automator, debugger） | 读取当前小程序运行时信息。 |
 | `automation_testaccount` | automator | 管理小程序测试号与登录 ticket：列出测试号、获取/设置/刷新 ticket。 |
-| `automation_viewport_action` | automator | 执行滚动、截图、真机调试或关闭工具；支持操作前等待。screenshot 可被 automation_generate_script 记录；不传 path... |
+| `automation_viewport_action` | automator | 执行滚动、真机调试或关闭工具；支持操作前等待 |
 | `automation_wx_api` | debugger（主；亦可 automator） | 调用、mock 或恢复 wx API。 |
 | `debug_clear_cache` | debugger | 清理当前项目的本地调试缓存，会影响当前调试上下文；清除的缓存类型由 action 指定。 |
 | `cloud_db_read_doc` | cloudbase-operator | 只读查询云数据库集合文档，支持条件、投影、排序和分页。 |

@@ -2,7 +2,7 @@
 name: debugger
 description: >-
   排查小程序/小游戏运行问题：console/network 日志、模拟器截图、运行时状态、wx API 诊断、清缓存。
-  用户提到报错日志、接口失败、截图取证时使用。
+  用户提到报错日志、接口失败、截图取证、模拟器卡住时使用。
 ---
 
 # debugger
@@ -24,7 +24,7 @@ description: >-
 |------|------|
 | console | `get_simulator_console`（`command` 必须是 grep，如 `grep -i error`；全量用 `grep -n .`） |
 | network | `get_simulator_network`（同上） |
-| 模拟器 UI 截图 | `simulator_screenshot`（**主归属本 scene**；优先 `waitForSelector`；不传 `path` 返回临时文件路径） |
+| 截图 | `simulator_screenshot`（优先 `waitForSelector`；参数见 `--help`） |
 | 当前页/页栈 | `automation_runtime_info` |
 | wx API 诊断/mock | `automation_wx_api`（**主归属本 scene**） |
 | 清缓存 | `debug_clear_cache` |
@@ -49,7 +49,7 @@ wechatide -c <clientName> simulator_screenshot --project <project> --wait-for-se
 
 - 不要无差别反复 `simulator_refresh`
 - 不要隐式改测试号、开远程调试或 `quit`
-- 本 scene 截图仅用于诊断取证
+- 截图统一用 `simulator_screenshot`
 
 ## 失败快表
 
@@ -57,7 +57,7 @@ wechatide -c <clientName> simulator_screenshot --project <project> --wait-for-se
 |------|------|
 | 窗口未开 / `PROJECT_*` | initializer；[project-tool-error-guide.md](../wechatide-tools/references/project-tool-error-guide.md) |
 | grep 结果为空 | 说明无匹配行；可放宽 pattern 或改用 `grep -n .`，≠「没有日志系统」 |
-| 截图失败 | 确认窗口已开与 selector |
+| 截图失败 | 确认窗口已开与 selector；用 `simulator_screenshot` 重试 |
 | 清缓存后仍异常 | 记入 evidence；移交 compiler 或说明需用户手动确认 |
 
 ## 移交

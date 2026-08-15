@@ -589,13 +589,14 @@
     {
       "id": "simulator_screenshot",
       "name": "截取模拟器画面",
-      "summary": "截图；支持 wait / waitForSelector 和本地 path。不传 path 时写入临时文件并返回路径；默认优化尺寸和分辨率（缩至长边 1280px + JPEG），optimize=false 写原始 PNG",
+      "summary": "截图；返回 path + imageWidth/imageHeight；默认优化尺寸（长边 1280 JPEG）",
       "group": "runtime",
       "source": {
         "type": "wechatide"
       },
       "scenes": [
-        "debugger"
+        "debugger",
+        "automator"
       ],
       "inputSchema": {
         "project": {
@@ -828,9 +829,9 @@
       }
     },
     {
-      "id": "automation_evaluate",
-      "name": "运行时执行",
-      "summary": "在小程序上下文中执行受控 evaluate。",
+      "id": "automation_game_action",
+      "name": "小游戏画布触摸",
+      "summary": "小游戏画布触摸：tap / swipe / touch*；坐标默认画布空间，可用 coordinateSpace=image + imageWidth/Height 按截图像素换算；截图请用 simulator_screenshot。",
       "group": "automation",
       "source": {
         "type": "wechatide"
@@ -841,7 +842,102 @@
       "inputSchema": {
         "project": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "项目绝对路径"
+        },
+        "action": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "tap",
+            "swipe",
+            "touchstart",
+            "touchmove",
+            "touchend"
+          ],
+          "description": "触摸操作类型"
+        },
+        "x": {
+          "type": "number",
+          "required": false,
+          "description": "坐标 x（tap / touch* 需要）"
+        },
+        "y": {
+          "type": "number",
+          "required": false,
+          "description": "坐标 y（tap / touch* 需要）"
+        },
+        "startX": {
+          "type": "number",
+          "required": false,
+          "description": "滑动起点 x（swipe 需要）"
+        },
+        "startY": {
+          "type": "number",
+          "required": false,
+          "description": "滑动起点 y（swipe 需要）"
+        },
+        "endX": {
+          "type": "number",
+          "required": false,
+          "description": "滑动终点 x（swipe 需要）"
+        },
+        "endY": {
+          "type": "number",
+          "required": false,
+          "description": "滑动终点 y（swipe 需要）"
+        },
+        "duration": {
+          "type": "number",
+          "required": false,
+          "description": "滑动时长毫秒（swipe 可选，默认 0）"
+        },
+        "coordinateSpace": {
+          "type": "string",
+          "required": false,
+          "enum": [
+            "canvas",
+            "image"
+          ],
+          "description": "坐标空间：canvas（默认，画布逻辑坐标）或 image（截图像素，需 imageWidth/imageHeight）"
+        },
+        "imageWidth": {
+          "type": "number",
+          "required": false,
+          "description": "截图宽度像素（coordinateSpace=image 时必填；与当前参照图一致）"
+        },
+        "imageHeight": {
+          "type": "number",
+          "required": false,
+          "description": "截图高度像素（coordinateSpace=image 时必填；与当前参照图一致）"
+        },
+        "wait": {
+          "type": "number",
+          "required": false,
+          "description": "执行前固定等待秒数（可选；范围 0-10；小游戏无 selector 等待）"
+        }
+      },
+      "execution": {
+        "transport": "skill_call",
+        "toolName": "automation_game_action"
+      }
+    },
+    {
+      "id": "automation_evaluate",
+      "name": "运行时执行",
+      "summary": "在当前小程序或小游戏运行时执行一段 JS 函数字符串并返回结果。该工具会实际执行代码，不是只读查询",
+      "group": "automation",
+      "source": {
+        "type": "wechatide"
+      },
+      "scenes": [
+        "automator"
+      ],
+      "inputSchema": {
+        "project": {
+          "type": "string",
+          "required": true,
+          "description": "项目绝对路径"
         },
         "action": {
           "type": "string",
@@ -850,11 +946,13 @@
         },
         "fnSource": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "函数源代码字符串，例如 function() { return wx.getSystemInfoSync(); }"
         },
         "args": {
           "type": "array",
-          "required": false
+          "required": false,
+          "description": "函数参数"
         }
       },
       "execution": {
@@ -1085,7 +1183,7 @@
     {
       "id": "automation_viewport_action",
       "name": "页面操作",
-      "summary": "执行滚动、截图、真机调试或关闭工具；支持操作前等待。screenshot 可被 automation_generate_script 记录；不传 path 时写入临时文件并返回路径。",
+      "summary": "执行滚动、真机调试或关闭工具；支持操作前等待",
       "group": "automation",
       "source": {
         "type": "wechatide"
@@ -1108,7 +1206,7 @@
             "remote",
             "close"
           ],
-          "description": "操作类型"
+          "description": "操作类型（screenshot 为兼容别名，等同 simulator_screenshot）"
         },
         "scrollTop": {
           "type": "number",
